@@ -1,0 +1,3 @@
+[submodule "rustImpl"]
+	path = rustImpl
+	url = git@github.com:Taskeren/explode3-caretaker-jni.git
