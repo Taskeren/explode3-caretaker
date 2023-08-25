@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2023 Team Project Detonation.
+ * All Rights Reversed.
+ */
+
 import cn.taskeren.explode3.caretaker.Caretaker;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

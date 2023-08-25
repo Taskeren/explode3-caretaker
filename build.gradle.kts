@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2023 Team Project Detonation.
+ * All Rights Reversed.
+ */
+
 plugins {
     java
     application

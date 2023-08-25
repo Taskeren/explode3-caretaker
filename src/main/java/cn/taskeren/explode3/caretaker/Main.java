@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2023 Team Project Detonation.
+ * All Rights Reversed.
+ */
+
 package cn.taskeren.explode3.caretaker;
 
 import java.nio.file.Files;
