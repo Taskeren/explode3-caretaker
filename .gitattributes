@@ -1,2 +1,2 @@
 *.xml   text=auto
-test.xml text eof=lf
+test.xml text=auto eof=lf
