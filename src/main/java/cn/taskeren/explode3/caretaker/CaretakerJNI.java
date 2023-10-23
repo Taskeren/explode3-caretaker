@@ -22,4 +22,6 @@ public class CaretakerJNI {
 
     public static native byte[] decrypt(byte[] data);
 
+    public static native byte[] sign(byte[] data);
+
 }

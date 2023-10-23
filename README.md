@@ -26,6 +26,12 @@ java -jar caretaker.jar dec <path-to-rnx>
 java -jar caretaker.jar enc <path-to-rnx>
 ```
 
+### Signing 签名
+
+```bash
+java -jar caretaker.jar sign <the-content-to-be-signed>
+```
+
 ## LICENSE 开源协议
 
 All rights not reserved.\

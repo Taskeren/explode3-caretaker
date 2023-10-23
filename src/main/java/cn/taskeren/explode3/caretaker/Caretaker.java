@@ -17,12 +17,32 @@ package cn.taskeren.explode3.caretaker;
  */
 public class Caretaker {
 
-    public static byte[] encrypt(byte[] decrypted) {
-        return CaretakerJNI.encrypt(decrypted);
-    }
+	public static byte[] encrypt(byte[] decrypted) {
+		return CaretakerJNI.encrypt(decrypted);
+	}
 
-    public static byte[] decrypt(byte[] encrypted) {
-        return CaretakerJNI.decrypt(encrypted);
-    }
+	public static byte[] decrypt(byte[] encrypted) {
+		return CaretakerJNI.decrypt(encrypted);
+	}
+
+	/**
+	 * Used to sign the data with tuner's key in header 'X-VERIFY' of the http requests.
+	 *
+	 * @param data the bytes of the body data
+	 * @return the signed data
+	 */
+	public static byte[] signData(byte[] data) {
+		return CaretakerJNI.sign(data);
+	}
+
+	/**
+	 * Used to sign the data with tuner's key in header 'X-VERIFY' of the http requests.
+	 *
+	 * @param data the body data
+	 * @return the signed data
+	 */
+	public static String signData(String data) {
+		return Utils.convertBitToString(signData(data.getBytes()));
+	}
 
 }
