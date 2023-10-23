@@ -30,8 +30,15 @@ jobs:
               repo: context.repo.repo,
               body: '❌ ${{ github.workflow }} failed: ${{ steps.gradle.outputs.build-scan-url }}'
             })
+      - name: Upload Build Reports
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-reports
+          path: build/reports/
       - name: Upload Artifacts
+        if: success()
         uses: actions/upload-artifact@v3
         with:
           name: build-artifacts
-          path: build/libs
+          path: build/libs/
