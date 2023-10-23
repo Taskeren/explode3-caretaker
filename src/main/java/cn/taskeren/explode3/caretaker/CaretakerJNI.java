@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2023 Team Project Detonation.
- * All Rights Reversed.
+ * All Rights Reserved.
  */
 
 package cn.taskeren.explode3.caretaker;
@@ -9,19 +9,19 @@ package cn.taskeren.explode3.caretaker;
  * Internal class for JNI linkage.
  * You should call these functions from {@link Caretaker}.
  *
- * @see Caretaker
  * @author Taskeren
+ * @see Caretaker
  */
-public class CaretakerJNI {
+class CaretakerJNI {
 
-    static {
-        System.loadLibrary("caretaker");
-    }
+	static {
+		System.loadLibrary("caretaker");
+	}
 
-    public static native byte[] encrypt(byte[] data);
+	public static native byte[] encrypt(byte[] data);
 
-    public static native byte[] decrypt(byte[] data);
+	public static native byte[] decrypt(byte[] data);
 
-    public static native byte[] sign(byte[] data);
+	public static native byte[] sign(byte[] data);
 
 }

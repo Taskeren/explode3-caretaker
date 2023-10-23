@@ -9,13 +9,12 @@ import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class TestCaretaker {
 
-    private byte[] read(String path) throws IOException, URISyntaxException {
+    private byte[] read(String path) throws IOException {
         var p = Path.of(path);
         if (Files.exists(p)) {
             return Files.readAllBytes(p);

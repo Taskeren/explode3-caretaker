@@ -1,15 +1,34 @@
 /*
  * Copyright (c) 2023 Team Project Detonation.
- * All Rights Reversed.
+ * All Rights Reserved.
  */
 
 package cn.taskeren.explode3.caretaker;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class Main {
+class Main {
 
+	/**
+	 * Caretaker CLI main entry.
+	 * <hr>
+	 * <p>
+	 * {@code caretaker <mode> <input>}
+	 * <p>
+	 * where mode can be "enc", "dec", or "sign".
+	 *
+	 * <ul>
+	 * <li>"enc" is used to encrypt the normal file, which you should pass the path at the 2nd argument.</li>
+	 * <li>"dec" is used to decrypt the encrypted file, which you should pass the path at the 2nd argument.</li>
+	 * <li>"sign" is used to sign the request data, mostly used in the GraphQL requests,
+	 * which you should pass the data string at the 2nd argument.</li>
+	 * </ul>
+	 *
+	 * @param args the arguments
+	 * @throws Exception if any error occurs
+	 */
 	public static void main(String[] args) throws Exception {
 		var mode = getOrNull(args, 0);
 		var input = getOrNull(args, 1);
@@ -22,6 +41,8 @@ public class Main {
 			System.out.println("Invalid Input: null");
 			return;
 		}
+
+		prepareDll();
 
 		Path inputPath = Path.of(input);
 		switch(mode) {
@@ -41,10 +62,21 @@ public class Main {
 		}
 	}
 
+	private static void prepareDll() {
+		var path = Path.of("caretaker.dll");
+		if(!Files.exists(path)) {
+			try {
+				Utils.extractDll();
+			} catch(IOException ex) {
+				System.out.println("Failed to extract caretaker.dll from jar.");
+				throw new RuntimeException(ex);
+			}
+		}
+	}
+
 	// util
 	private static String getOrNull(String[] args, int index) {
 		return (index >= 0 && index < args.length) ? args[index] : null;
 	}
-
 
 }

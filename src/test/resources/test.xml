@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!--
-  ~ Copyright (c) 2023 Team Project Detonation.
-  ~ All Rights Reversed.
-  -->
-
-<CMap>
+<CMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 <m_path>Astronomia (美國空軍 a.k.a. Daily Mix)</m_path>
 <m_barPerMin>50.00000</m_barPerMin>
 <m_timeOffset>-0.16666666666666669</m_timeOffset>

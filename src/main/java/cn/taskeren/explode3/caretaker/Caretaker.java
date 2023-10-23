@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2023 Team Project Detonation.
- * All Rights Reversed.
+ * All Rights Reserved.
  */
 
 package cn.taskeren.explode3.caretaker;
@@ -14,13 +14,27 @@ package cn.taskeren.explode3.caretaker;
  * @author Taskeren
  * @see Caretaker#encrypt(byte[])
  * @see Caretaker#decrypt(byte[])
+ * @see Caretaker#signData(byte[])
+ * @see Caretaker#signData(String)
  */
 public class Caretaker {
 
+	/**
+	 * Encrypt the rnx data.
+	 *
+	 * @param decrypted the bytes to encrypt
+	 * @return the encrypted bytes
+	 */
 	public static byte[] encrypt(byte[] decrypted) {
 		return CaretakerJNI.encrypt(decrypted);
 	}
 
+	/**
+	 * Decrypt the encrypted rnx data.
+	 *
+	 * @param encrypted the encrypted bytes
+	 * @return the decrypted bytes
+	 */
 	public static byte[] decrypt(byte[] encrypted) {
 		return CaretakerJNI.decrypt(encrypted);
 	}
