@@ -5,6 +5,8 @@
 
 package cn.taskeren.explode3.caretaker;
 
+import java.io.File;
+
 /**
  * <b>Encrypt and Decrypt Helper</b> for Dynamite Assets from Tuner Games which are encrypted.
  * <p>
@@ -57,6 +59,27 @@ public class Caretaker {
 	 */
 	public static String signData(String data) {
 		return Utils.convertBitToString(signData(data.getBytes()));
+	}
+
+	/**
+	 * Extract the caretaker.dll in the jar to the path.
+	 *
+	 * @throws Exception when any error occurs
+	 */
+	public static void prepareDynamicLibrary() throws Exception {
+		/*
+		 * For now, no linux dynamic library (.so) build of Caretaker is provided.
+		 * If you need one, you can open an issue, and I maybe provide it as a feature.
+		 */
+		if(!Utils.isWindows()) {
+			System.err.println("Unsupported Platform!");
+			return;
+		}
+
+		File destination = new File("caretaker.dll");
+		if(!destination.exists()) {
+			Utils.extractDll(destination);
+		}
 	}
 
 }

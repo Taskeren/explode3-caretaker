@@ -5,6 +5,7 @@
 
 package cn.taskeren.explode3.caretaker;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -26,14 +27,19 @@ class Utils {
 		return String.join("-", array);
 	}
 
-	public static void extractDll() throws IOException {
+	public static void extractDll(File dest) throws IOException {
 		try(var in = Utils.class.getResourceAsStream("/caretaker.dll")) {
-			try(var out = new FileOutputStream("caretaker.dll")) {
+			try(var out = new FileOutputStream(dest)) {
 				if(in != null) {
 					in.transferTo(out);
 				}
 			}
 		}
+	}
+
+	public static boolean isWindows() {
+		var osName = System.getProperty("os.name");
+		return osName.contains("Windows");
 	}
 
 }

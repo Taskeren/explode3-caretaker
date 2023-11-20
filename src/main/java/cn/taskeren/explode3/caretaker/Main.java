@@ -5,7 +5,6 @@
 
 package cn.taskeren.explode3.caretaker;
 
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -30,19 +29,19 @@ class Main {
 	 * @throws Exception if any error occurs
 	 */
 	public static void main(String[] args) throws Exception {
+		prepareEnvironment();
+
 		var mode = getOrNull(args, 0);
 		var input = getOrNull(args, 1);
 
 		if(mode == null) {
-			System.out.println("Invalid Mode: null");
+			System.err.println("Invalid Mode: null");
 			return;
 		}
 		if(input == null) {
-			System.out.println("Invalid Input: null");
+			System.err.println("Invalid Input: null");
 			return;
 		}
-
-		prepareDll();
 
 		Path inputPath = Path.of(input);
 		switch(mode) {
@@ -58,19 +57,16 @@ class Main {
 				Files.write(Path.of(output), decrypted);
 			}
 			case "sign" -> System.out.println(Caretaker.signData(input));
-			default -> System.out.println("Invalid Mode: " + mode);
+			default -> System.err.println("Invalid Mode: " + mode);
 		}
 	}
 
-	private static void prepareDll() {
-		var path = Path.of("caretaker.dll");
-		if(!Files.exists(path)) {
-			try {
-				Utils.extractDll();
-			} catch(IOException ex) {
-				System.out.println("Failed to extract caretaker.dll from jar.");
-				throw new RuntimeException(ex);
-			}
+	private static void prepareEnvironment() {
+		try {
+			Caretaker.prepareDynamicLibrary();
+		} catch(Exception e) {
+			System.err.println("Failed to prepare caretaker.dll");
+			throw new RuntimeException(e);
 		}
 	}
 
