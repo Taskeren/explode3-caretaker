@@ -10,7 +10,7 @@ plugins {
 }
 
 group = "explode"
-version = "1.3.0-SNAPSHOT"
+version = "1.4.0-SNAPSHOT"
 
 repositories {
 	mavenCentral()
@@ -88,6 +88,35 @@ publishing {
 			version = project.version.toString()
 
 			from(components["java"])
+		}
+	}
+}
+
+tasks.create("runImplCargoBuild") {
+	val rustImplDir = file("rustImpl")
+
+	onlyIf {
+		rustImplDir.let {
+			it.exists() && it.isDirectory && it.listFiles()?.isNotEmpty() == true
+		}
+	}
+
+	doLast {
+		exec {
+			commandLine("cargo", "build", "--verbose", "--release")
+			workingDir(rustImplDir)
+			standardOutput = System.out
+		}
+	}
+}
+
+tasks.create("updateImplFromCargoBuild") {
+	dependsOn("runImplCargoBuild")
+
+	doLast {
+		copy {
+			from(file("rustImpl/target/release/caretaker.dll"))
+			into(file("caretaker.dll").parentFile)
 		}
 	}
 }

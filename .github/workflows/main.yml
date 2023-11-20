@@ -16,7 +16,7 @@ jobs:
         uses: gradle/gradle-build-action@v2
       - name: Build with Gradle
         id: gradle
-        run: ./gradlew build --scan
+        run: ./gradlew updateImplFromCargoBuild build --scan
       - name: Upload Build Reports
         if: failure()
         uses: actions/upload-artifact@v3
