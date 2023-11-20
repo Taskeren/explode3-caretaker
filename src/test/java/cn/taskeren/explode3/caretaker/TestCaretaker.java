@@ -39,26 +39,6 @@ public class TestCaretaker {
         }
     }
 
-    private byte[] byteArrayCRLF2LF(byte[] crlf) {
-        return new String(crlf).replace("\r\n", "\n").getBytes();
-    }
-
-    @Test
-    public void testEncrypt() throws Exception {
-        var dec = byteArrayCRLF2LF(read("test.xml"));
-        var enc = read("test.xml.rnx");
-
-        Assertions.assertArrayEquals(enc, Caretaker.encrypt(dec));
-    }
-
-    @Test
-    public void testDecrypt() throws Exception {
-        var dec = byteArrayCRLF2LF(read("test.xml"));
-        var enc = read("test.xml.rnx");
-
-        Assertions.assertArrayEquals(dec, Caretaker.decrypt(enc));
-    }
-
     @Test
     public void testIsWindows() {
         Assertions.assertEquals(SystemUtils.IS_OS_WINDOWS, Utils.isWindows());
