@@ -7,6 +7,7 @@ plugins {
 	java
 	application
 	`maven-publish`
+	kotlin("jvm") version "1.9.0" apply false
 }
 
 group = "explode"
