@@ -14,19 +14,26 @@ AN UNOFFICIAL TOOL TO DECRYPT OFFICIAL ASSETS (.rnx).\
   with `caretaker.dll`
 - 在 [Release](https://github.com/Taskeren/explode3-caretaker/releases/latest) 下载带 `caretaker.dll` 的可执行包
 
-### Decrypt 解密
+### GUI
+
+Caretaker now provides GUI for Windows platform, where you can get it from releases.\
+看护人现在提供了 Windows 平台的 GUI，你可以在 releases 中下载。
+
+### CLI
+
+#### Decrypt 解密
 
 ```bash
 java -jar caretaker.jar dec <path-to-rnx>
 ```
 
-### Encrypt 加密
+#### Encrypt 加密
 
 ```bash
 java -jar caretaker.jar enc <path-to-rnx>
 ```
 
-### Signing 签名
+#### Signing 签名
 
 ```bash
 java -jar caretaker.jar sign <the-content-to-be-signed>
