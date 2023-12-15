@@ -5,9 +5,10 @@
 
 package cn.taskeren.explode3.caretaker;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import lombok.val;
+import lombok.var;
+
+import java.io.*;
 
 class Utils {
 
@@ -18,28 +19,37 @@ class Utils {
 	 * @return the string
 	 */
 	public static String convertBitToString(byte[] bits) {
-		var array = new String[bits.length];
+		val array = new String[bits.length];
 		for(int i = 0; i < bits.length; i++) {
-			var unsigned = Byte.toUnsignedInt(bits[i]);
-			var hex = "%02X".formatted(unsigned);
+			val unsigned = Byte.toUnsignedInt(bits[i]);
+			val hex = String.format("%02X", unsigned);
 			array[i] = hex;
 		}
 		return String.join("-", array);
 	}
 
 	public static void extractDll(File dest) throws IOException {
-		try(var in = Utils.class.getResourceAsStream("/caretaker.dll")) {
-			try(var out = new FileOutputStream(dest)) {
+		try(val in = Utils.class.getResourceAsStream("/caretaker.dll")) {
+			try(val out = new FileOutputStream(dest)) {
 				if(in != null) {
-					in.transferTo(out);
+					copy(in, out);
 				}
 			}
 		}
 	}
 
 	public static boolean isWindows() {
-		var osName = System.getProperty("os.name");
+		val osName = System.getProperty("os.name");
 		return osName.contains("Windows");
+	}
+
+	private static void copy(InputStream i, OutputStream o) throws IOException {
+		val buffer = new byte[8192];
+		var bytes = i.read(buffer);
+		while(bytes >= 0) {
+			o.write(buffer, 0, bytes);
+			bytes = i.read(buffer);
+		}
 	}
 
 }

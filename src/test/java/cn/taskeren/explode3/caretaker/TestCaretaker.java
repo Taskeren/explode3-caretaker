@@ -9,35 +9,7 @@ import org.apache.commons.lang3.SystemUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-
 public class TestCaretaker {
-
-    private byte[] read(String path) throws IOException {
-        var p = Path.of(path);
-        if (Files.exists(p)) {
-            return Files.readAllBytes(p);
-        } else {
-            try (var is = getClass().getClassLoader().getResourceAsStream(path)) {
-                if (is == null)
-                    throw new RuntimeException("Unable to find file in both local folder and in-jar resource! %s".formatted(path));
-
-                // read bytes from input stream
-                var buffer = new ByteArrayOutputStream();
-
-                int n;
-                byte[] data = new byte[16384];
-                while ((n = is.read(data, 0, data.length)) != -1) {
-                    buffer.write(data, 0, n);
-                }
-
-                return buffer.toByteArray();
-            }
-        }
-    }
 
     @Test
     public void testIsWindows() {

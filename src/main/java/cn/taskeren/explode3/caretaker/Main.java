@@ -5,6 +5,9 @@
 
 package cn.taskeren.explode3.caretaker;
 
+import lombok.val;
+
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -31,8 +34,8 @@ class Main {
 	public static void main(String[] args) throws Exception {
 		prepareEnvironment();
 
-		var mode = getOrNull(args, 0);
-		var input = getOrNull(args, 1);
+		val mode = getOrNull(args, 0);
+		val input = getOrNull(args, 1);
 
 		if(mode == null) {
 			System.err.println("Invalid Mode: null");
@@ -43,21 +46,27 @@ class Main {
 			return;
 		}
 
-		Path inputPath = Path.of(input);
+		Path inputPath = new File(input).toPath();
 		switch(mode) {
-			case "enc" -> {
-				var bytes = Files.readAllBytes(inputPath);
-				var encrypted = Caretaker.encrypt(bytes);
-				Files.write(Path.of(input + ".rnx"), encrypted);
+			case "enc": {
+				val bytes = Files.readAllBytes(inputPath);
+				val encrypted = Caretaker.encrypt(bytes);
+				Files.write(new File(input + ".rnx").toPath(), encrypted);
+				break;
 			}
-			case "dec" -> {
-				var bytes = Files.readAllBytes(inputPath);
-				var decrypted = Caretaker.decrypt(bytes);
-				var output = input.endsWith(".rnx") ? input.substring(0, input.length() - 4) : input + ".dec";
-				Files.write(Path.of(output), decrypted);
+			case "dec": {
+				val bytes = Files.readAllBytes(inputPath);
+				val decrypted = Caretaker.decrypt(bytes);
+				val output = input.endsWith(".rnx") ? input.substring(0, input.length() - 4) : input + ".dec";
+				Files.write(new File(output).toPath(), decrypted);
+				break;
 			}
-			case "sign" -> System.out.println(Caretaker.signData(input));
-			default -> System.err.println("Invalid Mode: " + mode);
+			case "sign":
+				System.out.println(Caretaker.signData(input));
+				break;
+			default:
+				System.err.println("Invalid Mode: " + mode);
+				break;
 		}
 	}
 

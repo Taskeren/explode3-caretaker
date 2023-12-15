@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2023 Team Project Detonation.
- * All Rights Reversed.
+ * All Rights Reserved.
  */
 
 plugins {
@@ -18,6 +18,11 @@ repositories {
 }
 
 dependencies {
+	compileOnly("org.projectlombok:lombok:1.18.30")
+	annotationProcessor("org.projectlombok:lombok:1.18.30")
+	testCompileOnly("org.projectlombok:lombok:1.18.30")
+	testAnnotationProcessor("org.projectlombok:lombok:1.18.30")
+
 	testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.0")
 	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.0")
 	testImplementation("org.apache.commons:commons-lang3:3.13.0")
@@ -26,6 +31,11 @@ dependencies {
 java {
 	withJavadocJar()
 	withSourcesJar()
+	sourceCompatibility = JavaVersion.VERSION_1_8
+	targetCompatibility = JavaVersion.VERSION_1_8
+	toolchain {
+		this.languageVersion.set(JavaLanguageVersion.of(8))
+	}
 }
 
 tasks.getByName<Test>("test") {
