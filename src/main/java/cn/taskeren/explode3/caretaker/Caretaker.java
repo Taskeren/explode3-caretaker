@@ -12,6 +12,10 @@ import java.io.File;
  * <p>
  * The assets are encrypted using <i>AES192/CBC/Pkcs7</i>, and KEY and IV are not public.
  * I'm not authorized to create this tool, nor to publish. So use this tool at your own risk.
+ * <p>
+ * Since <b>v1.4.0</b>, the JNI calls won't destroy JVM if any exception thrown in native codes.
+ * Instead, it will be thrown as {@link RuntimeException}.
+ * Make sure that you are using the latest implement DLL file.
  *
  * @author Taskeren
  * @see Caretaker#encrypt(byte[])
@@ -73,6 +77,7 @@ public class Caretaker {
 		 */
 		if(!Utils.isWindows()) {
 			System.err.println("Unsupported Platform!");
+			System.err.println("Contact the author for the implementation for Linux and macOS.");
 			return;
 		}
 
